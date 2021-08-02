@@ -1,0 +1,12 @@
+/dist/*
+.local
+.output.js
+*.md
+*.json
+.prettierrc
+/node_modules/**
+
+**/*.svg
+**/*.sh
+
+/public/*
