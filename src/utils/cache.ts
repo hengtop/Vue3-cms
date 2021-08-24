@@ -13,7 +13,7 @@ class LocalCache {
     window.localStorage.removeItem(key);
   }
   clearCache() {
-    window.localStorage.clear()
+    window.localStorage.clear();
   }
 }
 
