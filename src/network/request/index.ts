@@ -42,13 +42,11 @@ export default class VueRequest {
       return config;
     });
     this.instance.interceptors.response.use((res) => {
-      setTimeout(() => {
-        this.loading?.close();
-      }, 1000);
+      this.loading?.close();
       return res.data;
     });
   }
-  request<T>(config: VueRequestConfig): Promise<T> {
+  request<T>(config: VueRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
       //单个请求的请求拦截器
       if (config.interceptors?.requestInterceptor) {

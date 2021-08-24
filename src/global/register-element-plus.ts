@@ -1,9 +1,45 @@
 //按需引入element-plus
 import { App } from 'vue';
 import 'element-plus/lib/theme-chalk/base.css';
-import { ElButton } from 'element-plus';
+import {
+  ElButton,
+  ElTabs,
+  ElTabPane,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElFooter,
+  ElMenu,
+  ElSubmenu,
+  ElMenuItem,
+  ElMenuItemGroup
+} from 'element-plus';
 
-const components = [ElButton];
+const components = [
+  ElButton,
+  ElTabs,
+  ElTabPane,
+  ElForm,
+  ElFormItem,
+  ElInput,
+  ElCheckbox,
+  ElLink,
+  ElContainer,
+  ElAside,
+  ElHeader,
+  ElMain,
+  ElFooter,
+  ElMenu,
+  ElSubmenu,
+  ElMenuItem,
+  ElMenuItemGroup
+];
 
 export function registerElementPlus(app: App): void {
   for (const component of components) {
