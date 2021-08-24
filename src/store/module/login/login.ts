@@ -61,7 +61,7 @@ const loginModule: Module<LoginState, RootState> = {
     /* phoneLoginAction({ commit }, payload: any) {
       console.log('执行action', payload);
     }, */
-    
+
     //保证刷新vuex中的数据持久化
     loadLocalLoginData({ commit }) {
       const token = localCache.getCache('token');
