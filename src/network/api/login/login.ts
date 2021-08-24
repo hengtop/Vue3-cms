@@ -32,11 +32,6 @@ export const getUserInfoById = (id: number): Promise<LoginDataType> => {
 export const getUserMeunsByRoleId = (id: number): Promise<LoginDataType> => {
   return vueRequest.request<LoginDataType>({
     url: LoginAPI.GetUserMenus + id + '/menu',
-
-
-
-
-    
     method: 'get',
     showLoading: false
   });

@@ -8,7 +8,9 @@
         <el-header class="page-header">
           <NavHeader @isCollapseChange="isCollapseChange" />
         </el-header>
-        <el-main class="page-main">Main</el-main>
+        <el-main class="page-main">
+          <router-view></router-view>
+        </el-main>
         <el-footer class="page-footer">Footer</el-footer>
       </el-container>
     </el-container>

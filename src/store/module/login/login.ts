@@ -9,6 +9,8 @@ import {
 import type { AccountType } from '@/network/api/login/types';
 import localCache from '@/utils/cache';
 import router from '@/router';
+import { mapMenusToRoutes } from '@/router/map-menus';
+
 //Module这个类型需要传入泛型，一个是模块中state的类型，一个是根模块中state的类型
 const loginModule: Module<LoginState, RootState> = {
   namespaced: true,
@@ -32,11 +34,17 @@ const loginModule: Module<LoginState, RootState> = {
     //保存用户菜单信息
     changeUserMenus(state, userMenus: any) {
       state.userMenus = userMenus;
+      //动态生成路由
+      const routes = mapMenusToRoutes(userMenus);
+      routes.forEach((route) => {
+        //为·/main·动态添加子路由
+        router.addRoute('main', route);
+      });
     }
   },
   actions: {
-    //1.调用接口获取token
     async accountLoginAction({ commit }, payload: AccountType) {
+      //1.调用接口获取token
       const loginRes = await accountLoginRequest(payload);
       const { id, token } = loginRes.data;
       commit('changeToken', token);
@@ -63,7 +71,7 @@ const loginModule: Module<LoginState, RootState> = {
     }, */
 
     //保证刷新vuex中的数据持久化
-    loadLocalLoginData({ commit }) {
+    loadLocalLoginData({ commit, state }) {
       const token = localCache.getCache('token');
       if (token) {
         commit('changeToken', token);
@@ -75,6 +83,10 @@ const loginModule: Module<LoginState, RootState> = {
       const userMenus = localCache.getCache('userMenus');
       if (userMenus) {
         commit('changeUserMenus', userMenus);
+        //跳转到刷新前路由路径
+        router.push({
+          path: window.location.pathname ?? '/notFound'
+        });
       }
     }
   }
