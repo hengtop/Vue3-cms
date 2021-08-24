@@ -1,9 +1,6 @@
 <template>
   <div class="nav-header">
-    <i
-      :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
-      @click="handleFoldChick"
-    ></i>
+    <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'" @click="handleFoldChick"></i>
   </div>
 </template>
 

@@ -8,7 +8,7 @@ enum LoginAPI {
 }
 
 //登录获取token和用户id
-export const accountLoginRequest = (account: AccountType) => {
+export const accountLoginRequest = (account: AccountType): Promise<LoginDataType> => {
   return vueRequest.request<LoginDataType>({
     url: LoginAPI.AccountLogin,
     method: 'POST',
@@ -20,7 +20,7 @@ export const accountLoginRequest = (account: AccountType) => {
 };
 
 //通过id获取用户信息
-export const getUserInfoById = (id: number) => {
+export const getUserInfoById = (id: number): Promise<LoginDataType> => {
   return vueRequest.request<LoginDataType>({
     url: LoginAPI.GetUserInfo + id,
     method: 'get',
@@ -29,7 +29,7 @@ export const getUserInfoById = (id: number) => {
 };
 
 //通过用户id获取菜单
-export const getUserMeunsByRoleId = (id: number) => {
+export const getUserMeunsByRoleId = (id: number): Promise<LoginDataType> => {
   return vueRequest.request<LoginDataType>({
     url: LoginAPI.GetUserMenus + id + '/menu',
     method: 'get',

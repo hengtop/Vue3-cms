@@ -18,7 +18,7 @@ const store = createStore<RootState>({
 });
 
 //保证vuex数据持久化
-export const setupStore = () => {
+export const setupStore = (): void => {
   store.dispatch('login/loadLocalLoginData');
 };
 

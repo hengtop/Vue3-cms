@@ -19,13 +19,9 @@
       <el-checkbox type="primary" v-model="isKeepPassword" @change="keepStatus"
         >记住密码</el-checkbox
       >
-      <el-link type="primary" href="https://element.eleme.io" target="_blank"
-        >忘记密码</el-link
-      >
+      <el-link type="primary" href="https://element.eleme.io" target="_blank">忘记密码</el-link>
     </div>
-    <el-button class="login-btn" type="primary" @click="handelLoginClick"
-      >立即登录</el-button
-    >
+    <el-button class="login-btn" type="primary" @click="handelLoginClick">立即登录</el-button>
   </div>
 </template>
 
