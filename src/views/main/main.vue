@@ -43,6 +43,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
+//todo 菜单有点样式问题
 .main {
   position: fixed;
   top: 0;
@@ -98,6 +99,6 @@ export default defineComponent({
 .el-main {
   color: #333;
   text-align: center;
-  background-color: #f0f2f5;
+  background-color: #fff;
 }
 </style>

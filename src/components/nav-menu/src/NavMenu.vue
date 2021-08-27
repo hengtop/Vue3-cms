@@ -5,7 +5,7 @@
       <span v-if="!isCollapse" class="title">我的后台系统</span>
     </div>
     <el-menu
-      default-active="39"
+      :default-active="defaultValue"
       class="el-menu-vertical"
       background-color="#0c2135"
       text-color="#b7bdc3"
@@ -45,9 +45,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { computed, defineComponent, ref } from 'vue';
 import { useStore } from '@/store/index';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
+import { mapPathToMenus } from '@/router/map-menus';
 
 export default defineComponent({
   props: {
@@ -61,9 +62,15 @@ export default defineComponent({
   setup() {
     //获取菜单
     const store = useStore();
+    const userMenus = computed(() => store.state.login.userMenus);
+
     //获取路由
     const router = useRouter();
-    const userMenus = store.state.login.userMenus;
+    const route = useRoute();
+
+    //默认菜单选中处理,传入菜单列表和当前路由表路径
+    const menu = mapPathToMenus(userMenus.value, route.path);
+    const defaultValue = ref(menu.id + '');
     //处理菜单点击跳转事件
     const handleMenuItemClick = (item: any) => {
       router.push({
@@ -72,6 +79,7 @@ export default defineComponent({
     };
     return {
       userMenus,
+      defaultValue,
       handleMenuItemClick
     };
   }
@@ -82,8 +90,8 @@ export default defineComponent({
 .nav-menu {
   height: 100%;
   background-color: #001529;
-
   .logo {
+    width: 100%;
     display: flex;
     height: 28px;
     padding: 16px 10px 16px 10px;
@@ -135,6 +143,6 @@ export default defineComponent({
 
 .el-menu-vertical:not(.el-menu--collapse) {
   width: 100%;
-  height: calc(100% - 48px);
+  height: calc(100% - 60px);
 }
 </style>
