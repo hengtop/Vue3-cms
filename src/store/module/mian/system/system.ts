@@ -19,7 +19,11 @@ const systemModule: Module<SystemState, RootState> = {
       goodsList: [],
       goodsCount: 0,
       menuList: [],
-      menuCount: 0
+      menuCount: 0,
+      departmentList: [],
+      departmentCount: 0,
+      categoryList: [],
+      categoryCount: 0
     };
   },
   getters: {
@@ -34,6 +38,10 @@ const systemModule: Module<SystemState, RootState> = {
             return state.goodsList;
           case 'menu':
             return state.menuList;
+          case 'department':
+            return state.departmentList;
+          case 'category':
+            return state.categoryList;
         }
       };
     },
@@ -68,6 +76,18 @@ const systemModule: Module<SystemState, RootState> = {
     },
     changeMenuCount(state, menuCount: number) {
       state.menuCount = menuCount;
+    },
+    changeDepartmentList(state, departmentList: any[]) {
+      state.departmentList = departmentList;
+    },
+    changeDepartmentCount(state, departmentCount: number) {
+      state.departmentCount = departmentCount;
+    },
+    changeCategoryList(state, categoryList: any[]) {
+      state.categoryList = categoryList;
+    },
+    changeCategoryCount(state, categoryCount: number) {
+      state.categoryCount = categoryCount;
     }
   },
   actions: {
@@ -87,9 +107,16 @@ const systemModule: Module<SystemState, RootState> = {
           break;
         case 'menu':
           pageUrl = '/menu/list';
+          break;
+        case 'department':
+          pageUrl = '/department/list';
+          break;
+        case 'category':
+          pageUrl = '/category/list';
       }
       const pageListRes = await getPageListData(pageUrl, payload.queryInfo);
       const { list, totalCount } = pageListRes.data;
+      console.log(pageName);
       switch (pageName) {
         case 'users':
           commit('changeusersList', list);
@@ -106,6 +133,14 @@ const systemModule: Module<SystemState, RootState> = {
         case 'menu':
           commit('changeMenuList', list);
           commit('changeMenuCount', totalCount);
+          break;
+        case 'department':
+          commit('changeDepartmentList', list);
+          commit('changeDepartmentCount', totalCount);
+          break;
+        case 'category':
+          commit('changeCategoryList', list);
+          commit('changeCategoryCount', totalCount);
       }
     },
     //删除某条列表数据
@@ -141,9 +176,9 @@ const systemModule: Module<SystemState, RootState> = {
     },
     //编辑数据
     async editPageDataAction({ dispatch }, payload: any) {
-      const { pageName, newData, id } = payload;
+      const { pageName, editData, id } = payload;
       const pageUrl = `/${pageName}/${id}`;
-      await editPageData(pageUrl, newData);
+      await editPageData(pageUrl, editData);
       //请求最新数据
       dispatch('getPageListAction', {
         pageName,

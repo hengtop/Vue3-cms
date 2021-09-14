@@ -88,6 +88,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
 .nav-menu {
+  width: 100%;
   height: 100%;
   background-color: #001529;
   .logo {

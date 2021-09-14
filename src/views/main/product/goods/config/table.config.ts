@@ -4,7 +4,7 @@ export const tableConfig = {
   //是否展示选择项
   showSelectcolumn: true,
   //表格标题
-  tableTitle: '用户列表',
+  tableTitle: '商品列表',
   //表格项数据
   propList: [
     { prop: 'name', label: '商品名称', minWidth: '100', slotName: 'name' },

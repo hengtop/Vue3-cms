@@ -31,6 +31,7 @@ const router = createRouter({
 });
 
 router.beforeEach((to) => {
+  //出了登陆界面其他页面都需要token
   if (to.path !== '/login') {
     const token = localCache.getCache('token');
     if (!token) {

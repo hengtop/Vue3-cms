@@ -12,7 +12,9 @@
         <el-dropdown-menu>
           <el-dropdown-item icon="el-icon-user">个人信息</el-dropdown-item>
           <el-dropdown-item icon="el-icon-setting">设置</el-dropdown-item>
-          <el-dropdown-item divided icon="el-icon-circle-close">退出登录</el-dropdown-item>
+          <el-dropdown-item divided icon="el-icon-circle-close" @click="handleExitClick"
+            >退出登录</el-dropdown-item
+          >
         </el-dropdown-menu>
       </template>
     </el-dropdown>
@@ -21,10 +23,20 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import localCache from '@/utils/cache';
+import { useRouter } from 'vue-router';
 
 export default defineComponent({
   setup() {
-    return {};
+    const router = useRouter();
+    //退出按钮
+    const handleExitClick = () => {
+      localCache.removeCache('token');
+      router.push('/main');
+    };
+    return {
+      handleExitClick
+    };
   }
 });
 </script>

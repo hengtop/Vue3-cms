@@ -34,7 +34,10 @@ import {
   ElTableColumn,
   ElPagination,
   ElImage,
-  ElDialog
+  ElDialog,
+  ElTree,
+  ElCard,
+  ElTooltip
 } from 'element-plus';
 
 const components = [
@@ -70,7 +73,10 @@ const components = [
   ElTableColumn,
   ElPagination,
   ElImage,
-  ElDialog
+  ElDialog,
+  ElTree,
+  ElCard,
+  ElTooltip
 ];
 
 export function registerElementPlus(app: App): void {

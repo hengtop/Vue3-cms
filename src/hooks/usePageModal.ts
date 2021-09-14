@@ -2,7 +2,7 @@ import { ref } from 'vue';
 import pageModal from '@/components/page-modal';
 
 //定义一个回调函数来处理一些不是公共的逻辑，比如弹窗，有些表单项是不一定显示的
-type callbackFn = () => void;
+type callbackFn = (item?: any) => void;
 export function usePageModal(newCb?: callbackFn, editCb?: callbackFn) {
   //获取子组件
   const pageModalRef = ref<InstanceType<typeof pageModal>>();
@@ -22,7 +22,7 @@ export function usePageModal(newCb?: callbackFn, editCb?: callbackFn) {
     if (pageModalRef.value) {
       pageModalRef.value.centerDialogVisible = true;
     }
-    editCb && editCb();
+    editCb && editCb(item);
   };
 
   return [pageModalRef, defaultInfo, handleEditBtnClick, handleNewBtnClick];

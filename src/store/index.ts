@@ -3,6 +3,7 @@ import type { RootState } from './types';
 import type { RootStateWithModule } from './types';
 import login from './module/login/login';
 import system from './module/mian/system/system';
+import dashboard from './module/mian/analysis/dashboard';
 import { getPageListData } from '@/network/api/main/system/system';
 
 const store = createStore<RootState>({
@@ -12,7 +13,8 @@ const store = createStore<RootState>({
       age: 12,
       //部门数据，角色数据
       entireDepartment: [],
-      entireRole: []
+      entireRole: [],
+      entireMenu: []
     };
   },
   mutations: {
@@ -21,6 +23,9 @@ const store = createStore<RootState>({
     },
     changeEntireRole(state, list) {
       state.entireRole = list;
+    },
+    changeEntireMenu(state, list) {
+      state.entireMenu = list;
     }
   },
   actions: {
@@ -38,21 +43,28 @@ const store = createStore<RootState>({
         offset: 0,
         size: 1000
       });
+      const {
+        data: { list: menuList }
+      } = await getPageListData('menu/list', {
+        offset: 0,
+        size: 1000
+      });
       //保存
       commit('changeEntireDepartment', deapartmentList);
       commit('changeEntireRole', roleList);
+      commit('changeEntireMenu', menuList);
     }
   },
   modules: {
     login,
-    system
+    system,
+    dashboard
   }
 });
 
 //保证vuex数据持久化
 export const setupStore = (): void => {
   store.dispatch('login/loadLocalLoginData');
-  store.dispatch('getInitialDataAction');
 };
 
 //自己导出一个具有类型的useStore hook

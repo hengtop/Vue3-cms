@@ -49,12 +49,15 @@ const loginModule: Module<LoginState, RootState> = {
     }
   },
   actions: {
-    async accountLoginAction({ commit }, payload: AccountType) {
+    async accountLoginAction({ commit, dispatch }, payload: AccountType) {
       //1.调用接口获取token
       const loginRes = await accountLoginRequest(payload);
       const { id, token } = loginRes.data;
       commit('changeToken', token);
       localCache.setCache('token', token);
+
+      //获取一些初始化数据请求（所有的角色和部门信息）
+      dispatch('getInitialDataAction', null, { root: true });
 
       //2.通过id获取用户信息
       const userInfoRes = await getUserInfoById(id);
@@ -77,10 +80,12 @@ const loginModule: Module<LoginState, RootState> = {
     }, */
 
     //保证刷新vuex中的数据持久化,
-    loadLocalLoginData({ commit }) {
+    loadLocalLoginData({ commit, dispatch }) {
       const token = localCache.getCache('token');
       if (token) {
         commit('changeToken', token);
+        //获取一些初始化数据请求（所有的角色和部门信息）
+        dispatch('getInitialDataAction', null, { root: true });
       }
       const userInfo = localCache.getCache('userInfo');
       if (userInfo) {

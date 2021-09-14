@@ -1,18 +1,30 @@
 <template>
   <div class="chat">
-    <h2>chat</h2>
+    <saberEditor v-model="htmlString"></saberEditor>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
+import saberEditor from '@/base-ui/editor';
 
 export default defineComponent({
   name: 'chat',
   setup() {
-    return {};
+    const htmlString = ref<string>('我是一段文字');
+    return {
+      htmlString
+    };
+  },
+  components: {
+    saberEditor
   }
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.chat {
+  width: 100%;
+  height: 100%;
+}
+</style>

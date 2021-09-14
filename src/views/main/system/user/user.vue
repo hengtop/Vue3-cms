@@ -42,7 +42,7 @@ export default defineComponent({
     //调用自定义hooks
     const [pageTableRef, handleResetClick, handleQueryClick] = usePageSearch();
 
-    //新建/编辑回调
+    //新建/编辑回调处理密码框是否隐藏
     const newCallback = () => {
       const passwordItem = modalConfig.formItems?.find((item) => item.type === 'password');
       passwordItem!.isHidden = false;

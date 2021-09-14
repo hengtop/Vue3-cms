@@ -7,6 +7,7 @@ import App from './App.vue';
 import router from './router';
 import store from './store';
 import { setupStore } from './store';
+
 const app = createApp(App);
 //use中如果传入函数vue会调用函数并传入app这个参数
 app.use(store);

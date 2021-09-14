@@ -2,6 +2,8 @@
   <div class="page-modal">
     <el-dialog title="提示" v-model="centerDialogVisible" width="30%" center destroy-on-close>
       <saberForm v-bind="modalConfig" v-model="formData"></saberForm>
+      <!-- 一些其他的组件 -->
+      <slot></slot>
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="centerDialogVisible = false">取 消</el-button>
@@ -30,6 +32,11 @@ export default defineComponent({
     pageName: {
       type: String,
       required: true
+    },
+    //其他数据（不一定是表单数据）
+    otherInfo: {
+      type: Object,
+      default: () => ({})
     }
   },
   setup(props) {
@@ -57,14 +64,14 @@ export default defineComponent({
         //编辑
         store.dispatch('system/editPageDataAction', {
           pageName: props.pageName,
-          newData: { ...formData.value },
+          editData: { ...formData.value, ...props.otherInfo },
           id: props.defaultInfo.id
         });
       } else {
         //新建
         store.dispatch('system/createPageDataAction', {
           pageName: props.pageName,
-          newData: { ...formData.value }
+          newData: { ...formData.value, ...props.otherInfo }
         });
       }
     };

@@ -5,7 +5,7 @@ import pageTable from '@/components/page-table';
 export function usePageSearch() {
   //获取子组件对象
   const pageTableRef = ref<InstanceType<typeof pageTable>>();
-  //子组件事件
+  //子组件事件,重新请求数据
   const handleResetClick = () => {
     pageTableRef.value?.getPageData();
   };

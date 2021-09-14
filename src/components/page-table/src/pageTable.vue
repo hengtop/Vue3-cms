@@ -116,7 +116,6 @@ export default defineComponent({
     getPageData();
     const tableList = computed(() => store.getters['system/getPageListData'](props.pageName));
     const tableCount = computed(() => store.getters['system/getPageListCount'](props.pageName));
-
     //获取选中的表格项数据
     const handleSelectionChange = (value: any): void => {
       console.log(value);

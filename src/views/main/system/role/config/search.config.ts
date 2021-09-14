@@ -23,7 +23,7 @@ export const searchFormConfig: saberFormType = {
       type: 'datepicker',
       label: '创建时间',
       placeholder: '选择时间',
-      field: 'createTime',
+      field: 'createAt',
       otherOptions: {
         style: 'width:100%',
         'start-placeholder': '开始时间',
