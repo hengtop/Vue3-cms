@@ -48,7 +48,7 @@ export default class VueRequest {
   }
   request<T>(config: VueRequestConfig<T>): Promise<T> {
     return new Promise((resolve, reject) => {
-      //单个请求的请求拦截器
+      //单个请求的请求拦截器,这里的请求和响应拦截器为我们自己定义的回调函数，不是axios内部的
       if (config.interceptors?.requestInterceptor) {
         config = config.interceptors.requestInterceptor(config);
       }

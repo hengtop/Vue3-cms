@@ -5,6 +5,7 @@ import type { DashboardState } from './module/mian/analysis/types';
 export interface RootState {
   name: string;
   age: number;
+  avatarUrl: string;
   entireDepartment: any[];
   entireRole: any[];
   entireMenu: any[];

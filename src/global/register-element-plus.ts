@@ -37,7 +37,9 @@ import {
   ElDialog,
   ElTree,
   ElCard,
-  ElTooltip
+  ElTooltip,
+  ElUpload,
+  ElMessage
 } from 'element-plus';
 
 const components = [
@@ -76,7 +78,9 @@ const components = [
   ElDialog,
   ElTree,
   ElCard,
-  ElTooltip
+  ElTooltip,
+  ElUpload,
+  ElMessage
 ];
 
 export function registerElementPlus(app: App): void {

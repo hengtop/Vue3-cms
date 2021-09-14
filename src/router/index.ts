@@ -19,6 +19,11 @@ const routes: RouteRecordRaw[] = [
     component: () => import('@/views/login/login.vue')
   },
   {
+    path: '/userInfoEditor',
+    name: 'userInfoEditor',
+    component: () => import('@/views/user/userInfoEditor/userInfoEditor.vue')
+  },
+  {
     path: '/:pathMath(.*)*',
     name: 'notFound',
     component: () => import('@/views/errorPage/404.vue')

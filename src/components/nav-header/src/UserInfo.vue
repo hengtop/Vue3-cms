@@ -2,15 +2,14 @@
   <div class="user-info">
     <el-dropdown size="small">
       <span class="el-dropdown-link">
-        <el-avatar
-          class="avatar"
-          src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png"
-        ></el-avatar>
+        <el-avatar class="avatar" :src="imgUrl"></el-avatar>
         个人信息<i class="el-icon-arrow-down el-icon--right"></i>
       </span>
       <template #dropdown>
         <el-dropdown-menu>
-          <el-dropdown-item icon="el-icon-user">个人信息</el-dropdown-item>
+          <el-dropdown-item icon="el-icon-user" @click="handleToUserInfoEditor"
+            >个人信息</el-dropdown-item
+          >
           <el-dropdown-item icon="el-icon-setting">设置</el-dropdown-item>
           <el-dropdown-item divided icon="el-icon-circle-close" @click="handleExitClick"
             >退出登录</el-dropdown-item
@@ -22,20 +21,29 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import localCache from '@/utils/cache';
 import { useRouter } from 'vue-router';
+import { useStore } from '@/store';
 
 export default defineComponent({
   setup() {
     const router = useRouter();
+    const store = useStore();
+    const imgUrl = computed(() => store.state.avatarUrl);
     //退出按钮
     const handleExitClick = () => {
       localCache.removeCache('token');
       router.push('/main');
     };
+    //跳转到用户信息编辑页
+    const handleToUserInfoEditor = () => {
+      router.push('/userInfoEditor');
+    };
     return {
-      handleExitClick
+      handleExitClick,
+      handleToUserInfoEditor,
+      imgUrl
     };
   }
 });

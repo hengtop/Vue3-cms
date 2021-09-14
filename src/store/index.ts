@@ -5,6 +5,7 @@ import login from './module/login/login';
 import system from './module/mian/system/system';
 import dashboard from './module/mian/analysis/dashboard';
 import { getPageListData } from '@/network/api/main/system/system';
+import { getavatarById } from '@/network/api/fileLoader/avatarLoader';
 
 const store = createStore<RootState>({
   state() {
@@ -14,7 +15,8 @@ const store = createStore<RootState>({
       //部门数据，角色数据
       entireDepartment: [],
       entireRole: [],
-      entireMenu: []
+      entireMenu: [],
+      avatarUrl: ''
     };
   },
   mutations: {
@@ -26,6 +28,9 @@ const store = createStore<RootState>({
     },
     changeEntireMenu(state, list) {
       state.entireMenu = list;
+    },
+    changeAvatarUrl(state, url) {
+      state.avatarUrl = url;
     }
   },
   actions: {
@@ -49,10 +54,18 @@ const store = createStore<RootState>({
         offset: 0,
         size: 1000
       });
+      //获取头像
+
+      const avatarRes: any = await getavatarById('15');
+      //解析图片数据流
+      const blob = new Blob([avatarRes], { type: 'image/jpeg' });
+      const imgUrl = URL.createObjectURL(blob);
+
       //保存
       commit('changeEntireDepartment', deapartmentList);
       commit('changeEntireRole', roleList);
       commit('changeEntireMenu', menuList);
+      commit('changeAvatarUrl', imgUrl);
     }
   },
   modules: {
