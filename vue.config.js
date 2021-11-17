@@ -6,7 +6,7 @@ module.exports = {
     proxy: {
       '/api': {
         // 路径中有 /api 的请求都会走这个代理 , 可以自己定义一个,下
-        target: 'http://152.136.185.210:5000/',
+        target: 'http://xxxxx:5000/',
         secure: false,
         changeOrigin: true, // 是否更新代理后请求的headers中host地址
         ws: true, // 是否启用  websockets;
@@ -17,7 +17,7 @@ module.exports = {
       },
       '/fileApi': {
         // 路径中有 /api 的请求都会走这个代理 , 可以自己定义一个,下
-        target: 'http://121.196.194.165:9001/',
+        target: 'http://xxxxx:9001/',
         secure: true,
         changeOrigin: true, // 是否更新代理后请求的headers中host地址
         ws: true, // 是否启用  websockets;
